@@ -6,7 +6,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 
 const SignUP = () => {
-  const [userEmail, setUserEmail] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
   const { createUser, socialLogin, upDateUserInfo } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();

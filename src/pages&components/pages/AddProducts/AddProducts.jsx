@@ -1,15 +1,35 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+
+import useUser from "../../../hooks/useUsers";
 
 const AddProducts = () => {
+  const [user] = useUser();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleAddProduct = (data) => {};
+  const handleAddProduct = (data) => {
+    const { productName, price, location, email } = data;
+    const date = new Date().toLocaleDateString();
+    console.log(productName, price, location, email);
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMAGEBB_API_KEY}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        const imgUrl = imgData?.url;
+        const productInfo = { productName, price, location, email, imgUrl };
+      });
+  };
   return (
     <div className="px-24">
       <h3 className="text-gray-900 font-bold text-4xl">Add Product</h3>
@@ -28,6 +48,8 @@ const AddProducts = () => {
                 required: true,
               })}
               name="userName"
+              defaultValue={user?.userName}
+              readOnly
               id="userName"
               placeholder="userName"
               className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
@@ -44,6 +66,8 @@ const AddProducts = () => {
               })}
               name="email"
               id="email"
+              defaultValue={user?.email}
+              readOnly
               placeholder="email"
               className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
@@ -108,7 +132,7 @@ const AddProducts = () => {
               Location
             </label>
             <input
-              type="location"
+              type="text"
               {...register("location", {
                 required: true,
               })}
@@ -119,21 +143,37 @@ const AddProducts = () => {
             />
           </div>
         </div>
-        <div className="space-y-1 text-sm">
-          <label htmlFor="role" className="block dark:dark:text-gray-400">
-            Select Category
-          </label>
-          <select
-            {...register("role", {
-              required: true,
-            })}
-            name="role"
-            id="role"
-            className="w-full  p-3  rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
-          >
-            <option defaultValue>Buyer</option>
-            <option>Seller</option>
-          </select>
+        <div className="flex space-x-4">
+          <div className="space-y-1  text-sm w-1/2">
+            <label htmlFor="location" className="block dark:dark:text-gray-400">
+              Image
+            </label>
+            <input
+              type="file"
+              {...register("image", {
+                required: true,
+              })}
+              name="image"
+              id="image"
+              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+            />
+          </div>
+          <div className="space-y-1 w-1/2 text-sm">
+            <label htmlFor="role" className="block dark:dark:text-gray-400">
+              Select Category
+            </label>
+            <select
+              {...register("role", {
+                required: true,
+              })}
+              name="role"
+              id="role"
+              className="w-full  p-3  rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+            >
+              <option defaultValue>Buyer</option>
+              <option>Seller</option>
+            </select>
+          </div>
         </div>
         <div className="col-span-full">
           <label htmlFor="bio" className="text-sm">
