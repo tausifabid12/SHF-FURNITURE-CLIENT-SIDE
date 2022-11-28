@@ -52,7 +52,6 @@ const ProductDetails = () => {
       <div className="space-y-4">
         <DetailCard key={info._id} data={info} />
       </div>
-      <BookingModal />
     </div>
   );
 };

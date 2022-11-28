@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import useUser from "../../../hooks/useUsers";
 
 const BookingModal = ({ productName, price }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { register, handleSubmit } = useForm();
   const [user] = useUser();
 
@@ -29,7 +31,7 @@ const BookingModal = ({ productName, price }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setIsModalOpen(true);
         if (data.result) {
           toast.success("Booking Successful", {
             position: "top-center",
@@ -184,13 +186,12 @@ const BookingModal = ({ productName, price }) => {
                 />
               </div>
             </div>
-            <label
-              htmlFor="bookingModal"
+            <button
               type="submit"
               className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white"
             >
-              Book Now
-            </label>
+              <label htmlFor="bookingModal"> Book Now</label>
+            </button>
           </form>
         </div>
       </div>
