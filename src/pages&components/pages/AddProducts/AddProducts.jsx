@@ -1,7 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { json } from "react-router-dom";
 
 import useUser from "../../../hooks/useUsers";
+import Loading from "../../Loading/Loading";
 
 const AddProducts = () => {
   const [user] = useUser();
@@ -12,10 +15,15 @@ const AddProducts = () => {
     formState: { errors },
   } = useForm();
 
+  const { data: category, isLoading } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () =>
+      fetch(`http://localhost:5000/category`).then((res) => res.json()),
+  });
+
   const handleAddProduct = (data) => {
-    const { productName, price, location, email } = data;
+    const { productName, price, location, email, category, userName } = data;
     const date = new Date().toLocaleDateString();
-    console.log(productName, price, location, email);
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -26,10 +34,37 @@ const AddProducts = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
-        const imgUrl = imgData?.url;
-        const productInfo = { productName, price, location, email, imgUrl };
+        const imgUrl = imgData.data.url;
+
+        const productInfo = {
+          productName,
+          price,
+          location,
+          email,
+          imgUrl,
+          date,
+          category,
+        };
+
+        fetch("http://localhost:5000/products", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(productInfo),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            alert("success");
+            console.log(data);
+          });
       });
   };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
   return (
     <div className="px-24">
       <h3 className="text-gray-900 font-bold text-4xl">Add Product</h3>
@@ -159,19 +194,22 @@ const AddProducts = () => {
             />
           </div>
           <div className="space-y-1 w-1/2 text-sm">
-            <label htmlFor="role" className="block dark:dark:text-gray-400">
+            <label htmlFor="category" className="block dark:dark:text-gray-400">
               Select Category
             </label>
             <select
-              {...register("role", {
+              {...register("category", {
                 required: true,
               })}
-              name="role"
-              id="role"
+              name="category"
+              id="category"
               className="w-full  p-3  rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             >
-              <option defaultValue>Buyer</option>
-              <option>Seller</option>
+              <option defaultValue>Select Your Option</option>
+              {category?.data &&
+                category?.data.map((cat) => (
+                  <option key={cat._id}>{cat?.categoryName}</option>
+                ))}
             </select>
           </div>
         </div>

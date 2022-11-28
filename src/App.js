@@ -5,7 +5,7 @@ import "react-tabs/style/react-tabs.css";
 
 function App() {
   return (
-    <div className="max-w-[1440px] lg:px-24">
+    <div className="max-w-[1440px] lg:px-24 mx-auto">
       <RouterProvider router={router} />
     </div>
   );
