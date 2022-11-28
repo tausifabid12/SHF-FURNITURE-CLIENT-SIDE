@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const removeUser = () => {
-    deleteUser(user);
+    return deleteUser(auth.currentUser);
   };
 
   useEffect(() => {

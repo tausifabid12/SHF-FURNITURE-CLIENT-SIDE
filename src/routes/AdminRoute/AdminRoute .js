@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
     return <Loading />;
   }
 
-  if (userInfo.role === "admin") {
+  if (userInfo?.role === "admin") {
     return children;
   }
 

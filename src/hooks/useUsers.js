@@ -9,12 +9,14 @@ const useUser = () => {
   const [userLoading, setUserLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/usersInfo?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCurrentUser(data.data);
-        setUserLoading(false);
-      });
+    if (user?.email) {
+      fetch(`http://localhost:5000/usersInfo?email=${user?.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setCurrentUser(data.data);
+          setUserLoading(false);
+        });
+    }
   }, [user?.email]);
 
   return [currentUser, userLoading];
