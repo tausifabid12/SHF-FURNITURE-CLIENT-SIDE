@@ -4,6 +4,7 @@ import app from "../firebase/firebase";
 import { useState } from "react";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -40,6 +41,10 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser);
   };
 
+  const removeUser = () => {
+    deleteUser(user);
+  };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -55,6 +60,7 @@ const AuthProvider = ({ children }) => {
     socialLogin,
     logOut,
     upDateUserInfo,
+    removeUser,
   };
 
   return (

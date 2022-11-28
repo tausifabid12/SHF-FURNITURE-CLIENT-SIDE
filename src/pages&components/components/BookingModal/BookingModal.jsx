@@ -13,6 +13,13 @@ const BookingModal = ({ data }) => {
   const { productName, price, imgUrl } = data;
 
   const handleAddProduct = (data, e) => {
+    if (userInfo.role === "admin" || userInfo.role === "seller") {
+      toast.error("Sorry Your are not a buyer so you can't order", {
+        position: "top-center",
+        autoClose: 5000,
+      });
+      return;
+    }
     const { productName, price, location, email, userName, mobile } = data;
     const date = new Date().toLocaleDateString();
     const bookingInfo = {
@@ -77,7 +84,7 @@ const BookingModal = ({ data }) => {
                 </label>
                 <input
                   type="userName"
-                  {...register("userName", {})}
+                  {...register("userName")}
                   name="userName"
                   defaultValue={userInfo?.userName}
                   readOnly
@@ -95,7 +102,7 @@ const BookingModal = ({ data }) => {
                 </label>
                 <input
                   type="email"
-                  {...register("email", {})}
+                  {...register("email")}
                   name="email"
                   id="email"
                   defaultValue={userInfo?.email}
