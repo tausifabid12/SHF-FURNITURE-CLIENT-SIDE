@@ -1,9 +1,8 @@
 import React from "react";
-import { useContext } from "react";
 // import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../../contexts/AuthProvider";
+// import { AuthContext } from "../../../contexts/AuthProvider";
 import useUser from "../../../hooks/useUsers";
 
 const BookingModal = ({ data }) => {

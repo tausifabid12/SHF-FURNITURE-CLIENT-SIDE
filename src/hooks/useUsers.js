@@ -6,16 +6,18 @@ import { AuthContext } from "../contexts/AuthProvider";
 const useUser = () => {
   const { user } = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState([]);
+  const [userLoading, setUserLoading] = useState(true);
 
   useEffect(() => {
     fetch(`http://localhost:5000/usersInfo?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setCurrentUser(data.data);
+        setUserLoading(false);
       });
   }, [user?.email]);
 
-  return [currentUser];
+  return [currentUser, userLoading];
 };
 
 export default useUser;

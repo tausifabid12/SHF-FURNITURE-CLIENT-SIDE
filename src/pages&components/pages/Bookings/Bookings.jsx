@@ -3,7 +3,6 @@ import React from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../contexts/AuthProvider";
-import useUser from "../../../hooks/useUsers";
 
 const Bookings = () => {
   const { user } = useContext(AuthContext);

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const Login = () => {
   //   const [userEmail, setUserEmail] = useState("");
@@ -16,12 +17,18 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const handleLogin = (data, e) => {
     console.log(data);
     login(data.email, data.password)
       .then((result) => {
-        console.log(result);
+        navigate(from, { replace: true });
         setError("");
+        toast.success("login success");
         // setUserEmail(data.email);
         e.target.reset();
       })
@@ -34,9 +41,9 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     socialLogin(googleProvider)
       .then((result) => {
-        console.log(result);
+        navigate(from, { replace: true });
         setError("");
-        alert("signUP success");
+        toast.success("login success");
         // setUserEmail(data.email);
       })
       .catch((error) => {

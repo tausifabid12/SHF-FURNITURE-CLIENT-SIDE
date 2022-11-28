@@ -10,6 +10,9 @@ import Login from "../pages&components/pages/Login/Login";
 import ProductDetails from "../pages&components/pages/ProductDetails/ProductDetails";
 import SelectedProducts from "../pages&components/pages/SelectedProducts/SelectedProducts";
 import SignUP from "../pages&components/pages/SignUp/SignUP";
+import AdminRoute from "./AdminRoute/AdminRoute ";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import SellerRoute from "./SellerRoute/SellerRoute";
 
 const router = createBrowserRouter([
   {
@@ -29,13 +32,21 @@ const router = createBrowserRouter([
         path: "/products/:catName",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/products/${params.catName}`),
-        element: <SelectedProducts />,
+        element: (
+          <PrivateRoute>
+            <SelectedProducts />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/products/item/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/products/item/${params.id}`),
-        element: <ProductDetails />,
+        element: (
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -62,11 +73,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/addProduct",
-        element: <AddProducts />,
+        element: (
+          <SellerRoute>
+            <AddProducts />
+          </SellerRoute>
+        ),
       },
       {
         path: "/dashboard/allUsers",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
     ],
   },
