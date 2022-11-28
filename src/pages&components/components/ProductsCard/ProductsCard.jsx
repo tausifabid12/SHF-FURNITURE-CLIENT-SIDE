@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProductsCard = ({ product }) => {
-  const { productName, price, imgUrl } = product;
+  const { productName, price, imgUrl, _id } = product;
   return (
     <div>
       <div className="relative rounded-md shadow-md h-96 bg-[#f1f1f1] dark:dark:bg-gray-900 dark:dark:text-gray-100">
@@ -18,12 +19,14 @@ const ProductsCard = ({ product }) => {
             <p className="dark:dark:text-gray-100">Price: ${price}</p>
           </div>
           <div className="absolute bottom-2 left-[23%]">
-            <button
-              type="button"
-              className="p-3 font-semibold tracking-wide rounded-md dark:dark:bg-violet-400 dark:dark:text-gray-900"
-            >
-              view Details
-            </button>
+            <Link to={`/products/item/${_id}`}>
+              <button
+                type="button"
+                className="p-3 font-semibold tracking-wide rounded-md dark:dark:bg-violet-400 dark:dark:text-gray-900"
+              >
+                view Details
+              </button>
+            </Link>
           </div>
         </div>
       </div>

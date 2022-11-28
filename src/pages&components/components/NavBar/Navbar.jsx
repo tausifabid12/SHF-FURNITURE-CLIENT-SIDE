@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useContext(AuthContext);
 
   const navLinks = (
     <>
@@ -46,6 +49,46 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
           About us
         </Link>
       </li>
+    </>
+  );
+
+  const navButtons = (
+    <>
+      {user?.email ? (
+        <li>
+          <Link
+            to="/signUp"
+            className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+            aria-label="Sign up"
+            title="Sign up"
+          >
+            LogOut
+          </Link>
+        </li>
+      ) : (
+        <>
+          <li>
+            <Link
+              to="/login"
+              className="inline-flex items-center justify-center   h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+              aria-label="Sign up"
+              title="Sign up"
+            >
+              log in
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/signUp"
+              className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+              aria-label="Sign up"
+              title="Sign up"
+            >
+              Sign up
+            </Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -98,28 +141,7 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
           </span>
         </Link>
         <ul className=" items-center hidden space-x-5 lg:flex">{navLinks}</ul>
-        <ul className="items-center hidden space-x-5 lg:flex">
-          <li>
-            <Link
-              to="/login"
-              className="inline-flex items-center justify-center   h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Sign up"
-              title="Sign up"
-            >
-              log in
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/signUp"
-              className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Sign up"
-              title="Sign up"
-            >
-              Sign up
-            </Link>
-          </li>
-        </ul>
+        <ul className="items-center hidden space-x-5 lg:flex">{navButtons}</ul>
         <div className="lg:hidden">
           <button
             aria-label="Open Menu"
@@ -191,6 +213,9 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
                 </div>
                 <nav>
                   <ul className="space-y-4">{navLinks}</ul>
+                  <ul className="items-center pt-3  space-x-5 flex lg:hidden">
+                    {navButtons}
+                  </ul>
                 </nav>
               </div>
             </div>
