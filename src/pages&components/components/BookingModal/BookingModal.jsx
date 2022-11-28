@@ -1,14 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useState } from "react";
+import { useContext } from "react";
+// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import useUser from "../../../hooks/useUsers";
 
-const BookingModal = ({ productName, price }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const BookingModal = ({ data }) => {
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const { register, handleSubmit } = useForm();
-  const [user] = useUser();
+
+  const [userInfo] = useUser();
+  const { productName, price, imgUrl } = data;
 
   const handleAddProduct = (data, e) => {
     const { productName, price, location, email, userName, mobile } = data;
@@ -21,6 +24,7 @@ const BookingModal = ({ productName, price }) => {
       userName,
       mobile,
       date,
+      imgUrl,
     };
     fetch(`http://localhost:5000/booking`, {
       method: "POST",
@@ -31,7 +35,7 @@ const BookingModal = ({ productName, price }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        setIsModalOpen(true);
+        // setIsModalOpen(true);
         if (data.result) {
           toast.success("Booking Successful", {
             position: "top-center",
@@ -74,11 +78,9 @@ const BookingModal = ({ productName, price }) => {
                 </label>
                 <input
                   type="userName"
-                  {...register("userName", {
-                    required: true,
-                  })}
+                  {...register("userName", {})}
                   name="userName"
-                  defaultValue={user?.userName}
+                  defaultValue={userInfo?.userName}
                   readOnly
                   id="userName"
                   placeholder="userName"
@@ -94,12 +96,10 @@ const BookingModal = ({ productName, price }) => {
                 </label>
                 <input
                   type="email"
-                  {...register("email", {
-                    required: true,
-                  })}
+                  {...register("email", {})}
                   name="email"
                   id="email"
-                  defaultValue={user?.email}
+                  defaultValue={userInfo?.email}
                   readOnly
                   placeholder="email"
                   className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
@@ -118,9 +118,7 @@ const BookingModal = ({ productName, price }) => {
                   type="text"
                   defaultValue={productName}
                   readOnly
-                  {...register("productName", {
-                    required: true,
-                  })}
+                  {...register("productName", {})}
                   name="productName"
                   id="productName"
                   placeholder="Product Name"
@@ -138,9 +136,7 @@ const BookingModal = ({ productName, price }) => {
                   type="text"
                   defaultValue={price}
                   readOnly
-                  {...register("price", {
-                    required: true,
-                  })}
+                  {...register("price", {})}
                   name="price"
                   id="price"
                   placeholder="price"
@@ -186,11 +182,14 @@ const BookingModal = ({ productName, price }) => {
                 />
               </div>
             </div>
-            <button
-              type="submit"
-              className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white"
-            >
-              <label htmlFor="bookingModal"> Book Now</label>
+
+            <button type="submit">
+              <label
+                htmlFor="bookingModal"
+                className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white"
+              >
+                Submit now
+              </label>
             </button>
           </form>
         </div>

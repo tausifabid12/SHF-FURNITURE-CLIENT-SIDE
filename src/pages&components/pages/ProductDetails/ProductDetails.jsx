@@ -40,10 +40,10 @@ const ProductDetails = () => {
               <span className="dark:dark:text-gray-400">/</span>
               <Link
                 rel="noopener noreferrer"
-                href="#"
+                to={`/products/${info.category}`}
                 className="flex items-center px-1 capitalize hover:underline"
               >
-                {info.category}
+                {info.category}s
               </Link>
             </li>
           </ol>

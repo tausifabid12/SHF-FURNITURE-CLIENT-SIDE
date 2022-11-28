@@ -43,7 +43,7 @@ const DetailCard = ({ data }) => {
           </div>
         </div>
       </div>
-      <BookingModal price={price} productName={productName} />
+      <BookingModal data={data} />
     </div>
   );
 };

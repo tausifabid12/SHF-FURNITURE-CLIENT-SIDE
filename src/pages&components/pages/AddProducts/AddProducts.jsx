@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { json } from "react-router-dom";
+
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 import useUser from "../../../hooks/useUsers";
 import Loading from "../../Loading/Loading";
 
 const AddProducts = () => {
-  const [user] = useUser();
+  const [userInfo] = useUser();
 
   const {
     register,
@@ -83,7 +84,7 @@ const AddProducts = () => {
                 required: true,
               })}
               name="userName"
-              defaultValue={user?.userName}
+              defaultValue={userInfo?.userName}
               readOnly
               id="userName"
               placeholder="userName"
@@ -101,7 +102,7 @@ const AddProducts = () => {
               })}
               name="email"
               id="email"
-              defaultValue={user?.email}
+              defaultValue={userInfo?.email}
               readOnly
               placeholder="email"
               className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "

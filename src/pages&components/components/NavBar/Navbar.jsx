@@ -5,7 +5,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const navLinks = (
     <>
@@ -21,7 +21,7 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
       </li>
       <li>
         <Link
-          to="/allProducts"
+          to="/products"
           aria-label="Our product"
           title="Our product"
           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -57,6 +57,7 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
       {user?.email ? (
         <li>
           <Link
+            onClick={() => logOut()}
             to="/signUp"
             className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
             aria-label="Sign up"
