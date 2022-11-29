@@ -4,18 +4,19 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
-const Bookings = () => {
+const MyProducts = () => {
   const { user } = useContext(AuthContext);
   const { data: bookings, refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/booking/user?email=${user?.email}`).then(
+      fetch(`http://localhost:5000/userProducts?email=${user?.email}`).then(
         (res) => res.json()
       ),
   });
 
+  console.log(user?.email);
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/delete/booking/${id}`, {
+    fetch(`http://localhost:5000/delete/products/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -30,7 +31,7 @@ const Bookings = () => {
 
   return (
     <div className="lg:px-10 ">
-      <h2 className="text-3xl font-bold text-gray-900 pb-3">My Bookings</h2>
+      <h2 className="text-3xl font-bold text-gray-900 pb-3">My Products</h2>
       <div>
         <div className="container p-2  mx-auto sm:p-4 dark:dark:text-gray-100">
           <div className="overflow-x-auto">
@@ -42,7 +43,7 @@ const Bookings = () => {
                   <th className="p-3">Price</th>
                   <th className="p-3">Status</th>
                   <th className="p-3 ">Delete</th>
-                  <th className="p-3 ">Payment</th>
+                  <th className="p-3 ">Advertise</th>
                 </tr>
               </thead>
               <tbody>
@@ -76,7 +77,7 @@ const Bookings = () => {
                       </td>
                       <td className="p-3">
                         <button className="btn glass btn-xs text-gray-900">
-                          Unpaid
+                          UnSoled
                         </button>
                       </td>
                       <td className="p-3 ">
@@ -89,7 +90,7 @@ const Bookings = () => {
                       </td>
                       <td className="p-3 ">
                         <span className="btn  btn-xs bg-green-600 border-none text-white  ">
-                          <span>Pay now</span>
+                          <span>Advertise</span>
                         </span>
                       </td>
                     </tr>
@@ -103,4 +104,4 @@ const Bookings = () => {
   );
 };
 
-export default Bookings;
+export default MyProducts;

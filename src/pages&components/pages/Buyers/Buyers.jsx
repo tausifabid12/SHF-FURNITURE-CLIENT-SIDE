@@ -49,7 +49,6 @@ const Buyers = () => {
                 <th className="p-3">User Name</th>
                 <th className="p-3">Email</th>
                 <th className="p-3">Role</th>
-                <th className="p-3">Verify</th>
                 <th className="p-3">Delete</th>
               </tr>
             </thead>
@@ -70,11 +69,6 @@ const Buyers = () => {
                       <p className="dark:dark:text-gray-400">{user?.role}</p>
                     </td>
 
-                    <td className="">
-                      <button className="px-3 py-1 font-semibold rounded-md bg-green-600 text-white dark:dark:bg-violet-400 dark:dark:text-gray-900">
-                        Verify
-                      </button>
-                    </td>
                     <td className="">
                       <button
                         onClick={() => handleDeleteUser(user?._id)}
