@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
+
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const MyProducts = () => {
@@ -31,9 +32,20 @@ const MyProducts = () => {
   };
 
   const handleAdvertise = (id) => {
-    fetch(`http://localhost:5000/delete/products/${id}`, {
+    fetch(`http://localhost:5000/products?id=${id}`, {
       method: "PUT",
-    });
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ advertise: true }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          refetch();
+          toast.success("product added to advertise");
+        }
+      });
   };
 
   return (
@@ -98,7 +110,11 @@ const MyProducts = () => {
                       <td className="p-3 ">
                         <span
                           onClick={() => handleAdvertise(order._id)}
-                          className="btn  btn-xs bg-green-600 border-none text-white  "
+                          className={`btn  btn-xs  border-none text-white ${
+                            order.advertise
+                              ? "btn-disabled bg-gray-900"
+                              : "bg-green-600"
+                          } `}
                         >
                           <span>Advertise</span>
                         </span>

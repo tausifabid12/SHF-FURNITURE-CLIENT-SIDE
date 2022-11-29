@@ -38,6 +38,22 @@ const Sellers = () => {
         }
       });
   };
+
+  const handleVerify = (id) => {
+    fetch(`http://localhost:5000/user/verified?id=${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.result) {
+          refetch();
+          toast.success("seller is now verified");
+        }
+      });
+  };
   return (
     <div className="lg:p-8">
       <div className="container p-2 mx-auto sm:p-4 dark:dark:text-gray-100">
@@ -73,7 +89,14 @@ const Sellers = () => {
                     </td>
 
                     <td className="cursor-pointer">
-                      <button className="btn btn-xs bg-green-600 border-none text-white ">
+                      <button
+                        onClick={() => handleVerify(user?._id)}
+                        className={` ${
+                          user?.verified
+                            ? "btn-disabled bg-gray-900 "
+                            : "bg-green-600  "
+                        }btn btn-xs border-none text-white`}
+                      >
                         Verify
                       </button>
                     </td>

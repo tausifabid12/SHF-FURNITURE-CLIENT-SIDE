@@ -6,6 +6,7 @@ import AllProducts from "../pages&components/pages/AllProducts/AllProducts";
 import Blogs from "../pages&components/pages/Blogs/Blogs";
 import Bookings from "../pages&components/pages/Bookings/Bookings";
 import Buyers from "../pages&components/pages/Buyers/Buyers";
+import DashBoardWelcome from "../pages&components/pages/DashbordWelcome/DashBoardWelcome";
 import ErrorPage from "../pages&components/pages/ErrorPage/ErrorPage";
 import Home from "../pages&components/pages/Home/Home/Home";
 import Login from "../pages&components/pages/Login/Login";
@@ -77,10 +78,10 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // {
-      //   path: "/dashboard",
-      //   element:,
-      // },
+      {
+        path: "/dashboard",
+        element: <DashBoardWelcome />,
+      },
       {
         path: "/dashboard/bookings",
         element: <Bookings />,

@@ -17,9 +17,9 @@ const Category = () => {
 
   console.log(categories?.data);
   return (
-    <section className="py-6 dark:dark:bg-gray-800 dark:dark:text-gray-50">
-      <h2 className="text-center text-5xl font-bold py-5">Categories</h2>
-      <div className="px-4 py-10 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    <section className="py-8 dark:dark:bg-gray-800 dark:dark:text-gray-50">
+      <h2 className=" text-4xl px-4 font-bold py-4">Categories</h2>
+      <div className="px-4 pb-10 pt-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pb-20 ">
         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
           {categories?.data.map((cat) => (
             <Link to={`/products/${cat?.categoryName}`} aria-label="View Item">

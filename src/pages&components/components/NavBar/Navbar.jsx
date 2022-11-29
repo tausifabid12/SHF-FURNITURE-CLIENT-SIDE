@@ -58,7 +58,7 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
         <li>
           <Link
             onClick={() => logOut()}
-            to="/signUp"
+            to="/login"
             className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
             aria-label="Sign up"
             title="Sign up"

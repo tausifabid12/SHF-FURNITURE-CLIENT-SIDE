@@ -125,7 +125,7 @@ const BookingModal = ({ data }) => {
                   type="text"
                   defaultValue={productName}
                   readOnly
-                  {...register("productName", {})}
+                  {...register("productName")}
                   name="productName"
                   id="productName"
                   placeholder="Product Name"
@@ -143,7 +143,7 @@ const BookingModal = ({ data }) => {
                   type="text"
                   defaultValue={price}
                   readOnly
-                  {...register("price", {})}
+                  {...register("price")}
                   name="price"
                   id="price"
                   placeholder="price"
@@ -161,9 +161,7 @@ const BookingModal = ({ data }) => {
                 </label>
                 <input
                   type="text"
-                  {...register("mobile", {
-                    required: true,
-                  })}
+                  {...register("mobile")}
                   name="mobile"
                   id="mobile"
                   placeholder="mobile"
@@ -179,9 +177,7 @@ const BookingModal = ({ data }) => {
                 </label>
                 <input
                   type="text"
-                  {...register("location", {
-                    required: true,
-                  })}
+                  {...register("location")}
                   name="location"
                   id="location"
                   placeholder="location"
@@ -190,13 +186,11 @@ const BookingModal = ({ data }) => {
               </div>
             </div>
 
-            <button type="submit">
-              <label
-                htmlFor="bookingModal"
-                className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white"
-              >
-                Submit now
-              </label>
+            <button
+              type="submit"
+              className="block w-full  p-3 text-center rounded-md bg-gray-900  text-white"
+            >
+              <label htmlFor="bookingModal">Submit now</label>
             </button>
           </form>
         </div>

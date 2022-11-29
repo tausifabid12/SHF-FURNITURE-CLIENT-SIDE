@@ -2,9 +2,21 @@ import React from "react";
 import BookingModal from "../BookingModal/BookingModal";
 import { FaHeartBroken } from "react-icons/fa";
 import ReportModal from "../ReportModal/ReportModal";
-
+import { FaCheckCircle } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
 const DetailCard = ({ data }) => {
   const { price, productName, date, imgUrl, email, location, _id } = data;
+
+  const { data: seller } = useQuery({
+    queryKey: ["seller", email],
+    queryFn: () =>
+      fetch(`http://localhost:5000/usersInfo?email=${email}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
+  });
+
   return (
     <div className=" relative text-gray-900 px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="absolute right-0">
@@ -47,7 +59,14 @@ const DetailCard = ({ data }) => {
               Book Now
             </label>
             <div>
-              <p className="text-lg font-bold">Post By : {email}</p>
+              <p className="text-lg flex items-center  font-bold">
+                Post By : {email}
+                {seller?.data?.verified && (
+                  <span className="text-green-600 pl-1">
+                    <FaCheckCircle />
+                  </span>
+                )}
+              </p>
               <p className="text-gray-900 text-sm font-bold pt-1">On: {date}</p>
             </div>
           </div>

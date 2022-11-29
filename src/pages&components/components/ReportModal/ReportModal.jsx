@@ -1,13 +1,20 @@
 import React from "react";
+import { useContext } from "react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const ReportModal = ({ id, productName }) => {
+  const { user } = useContext(AuthContext);
   const handleReport = (e) => {
     e.preventDefault();
     const form = e.target;
-    const email = form.email.value;
     const message = form.message.value;
-    const reportInfo = { email, productName, message, productId: id };
+    const reportInfo = {
+      email: user?.email,
+      productName,
+      message,
+      productId: id,
+    };
     console.log(reportInfo);
 
     fetch(`http://localhost:5000/report`, {
@@ -51,6 +58,8 @@ const ReportModal = ({ id, productName }) => {
               </label>
               <input
                 type="text"
+                defaultValue={user?.email}
+                readOnly
                 placeholder="email"
                 name="email"
                 className="input input-bordered"
@@ -67,7 +76,12 @@ const ReportModal = ({ id, productName }) => {
               ></textarea>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Report</button>
+              <button
+                type="submit"
+                className="btn btn-outline border-2 font-bold "
+              >
+                <label htmlFor="reportModal">Report</label>
+              </button>
             </div>
           </form>
         </div>
