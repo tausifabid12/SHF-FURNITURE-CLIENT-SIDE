@@ -6,7 +6,11 @@ const UserReports = () => {
   const { data: reports, refetch } = useQuery({
     queryKey: ["reports"],
     queryFn: () =>
-      fetch(`http://localhost:5000/report`).then((res) => res.json()),
+      fetch(`http://localhost:5000/report`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
 
   const handleDelete = (id) => {
@@ -24,7 +28,7 @@ const UserReports = () => {
 
   return (
     <div className="lg:px-10 ">
-      <h2 className="text-3xl font-bold text-gray-900 pb-3">My Orders</h2>
+      <h2 className="text-3xl font-bold text-gray-900 pb-3">Reports</h2>
       <div>
         <div className="container p-2  mx-auto sm:p-4 dark:dark:text-gray-100">
           <div className="overflow-x-auto">

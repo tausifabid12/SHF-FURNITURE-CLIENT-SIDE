@@ -1,15 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
+import useToken from "../../../hooks/useToken";
+import { toast } from "react-toastify";
 
 const SignUP = () => {
   // const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
-  const { createUser, socialLogin, upDateUserInfo } = useContext(AuthContext);
+  const { createUser, socialLogin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
+  const navigate = useNavigate();
+
+  console.log(createdUserEmail, token);
+  if (token) {
+    navigate("/");
+  }
 
   const {
     register,
@@ -18,12 +28,12 @@ const SignUP = () => {
   } = useForm();
 
   const handleSignUp = (data, e) => {
+    const userEmail = data?.email;
     const userInfo = {
       email: data?.email,
       userName: data?.userName,
       role: data?.role,
     };
-    console.log(userInfo);
     createUser(data.email, data.password)
       .then((result) => {
         console.log(result);
@@ -31,11 +41,15 @@ const SignUP = () => {
         handleUser(userInfo)
           .then((res) => res.json())
           .then((data) => {
-            alert("signUP success");
-            upDateUserInfo({
-              displayName: data?.userName,
-              photoURL: "https://example.com/jane-q-user/profile.jpg",
-            });
+            if (data.result) {
+              toast.success("signUP success");
+              // upDateUserInfo({
+              //   displayName: data?.userName,
+              //   photoURL: "https://example.com/jane-q-user/profile.jpg",
+              // });
+              setCreatedUserEmail(userEmail);
+            }
+
             // setUserEmail(data.email);
             e.target.reset();
           });
@@ -49,10 +63,22 @@ const SignUP = () => {
   const handleGoogleSignIn = () => {
     socialLogin(googleProvider)
       .then((result) => {
-        console.log(result);
+        const email = result.user?.email;
+        const userInfo = {
+          email: result.user?.email,
+          userName: result.user?.displayName,
+          role: "buyer",
+        };
+        handleUser(userInfo)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.result) {
+              toast.success("signUP success");
+              setCreatedUserEmail(email);
+            }
+          });
+
         setError("");
-        alert("signUP success");
-        // setUserEmail(data.email);
       })
       .catch((error) => {
         setError(error.message);

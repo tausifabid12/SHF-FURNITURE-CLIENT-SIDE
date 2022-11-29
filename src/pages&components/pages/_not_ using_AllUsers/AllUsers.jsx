@@ -5,7 +5,11 @@ const AllUsers = () => {
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users`).then((res) => res.json()),
+      fetch(`http://localhost:5000/users`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
 
   console.log(users?.data);

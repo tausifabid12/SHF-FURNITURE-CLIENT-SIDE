@@ -11,9 +11,11 @@ const Sellers = () => {
   const { data: sellers, refetch } = useQuery({
     queryKey: ["sellers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users?role=seller`).then((res) =>
-        res.json()
-      ),
+      fetch(`http://localhost:5000/users?role=seller`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
 
   const handleDeleteUser = (id) => {

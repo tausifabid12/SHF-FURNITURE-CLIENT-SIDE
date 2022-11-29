@@ -5,12 +5,15 @@ import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import { toast } from "react-toastify";
+import useToken from "../../../hooks/useToken";
 
 const Login = () => {
   //   const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
   const googleProvider = new GoogleAuthProvider();
   const { login, socialLogin } = useContext(AuthContext);
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  const [token] = useToken(loginUserEmail);
   const {
     register,
     handleSubmit,
@@ -19,17 +22,21 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
+
+  console.log(token, loginUserEmail);
 
   const handleLogin = (data, e) => {
     console.log(data);
     login(data.email, data.password)
       .then((result) => {
-        navigate(from, { replace: true });
         setError("");
+        setLoginUserEmail(data.email);
         toast.success("login success");
-        // setUserEmail(data.email);
         e.target.reset();
       })
       .catch((error) => {
@@ -39,9 +46,11 @@ const Login = () => {
   };
 
   const handleGoogleSignIn = () => {
+    console.log();
     socialLogin(googleProvider)
       .then((result) => {
-        navigate(from, { replace: true });
+        console.log(result.user.email);
+        setLoginUserEmail(result.user.email);
         setError("");
         toast.success("login success");
         // setUserEmail(data.email);

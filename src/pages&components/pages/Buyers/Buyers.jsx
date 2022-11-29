@@ -8,7 +8,11 @@ const Buyers = () => {
   const { data: buyers, refetch } = useQuery({
     queryKey: ["buyers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users?role=buyer`).then((res) => res.json()),
+      fetch(`http://localhost:5000/users?role=buyer`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
 
   const handleDeleteUser = (id) => {
