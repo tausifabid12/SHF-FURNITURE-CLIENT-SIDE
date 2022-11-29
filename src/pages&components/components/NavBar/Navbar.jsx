@@ -138,7 +138,7 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
             <rect x="14" y="11" width="7" height="12" />
           </svg>
           <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-            Company
+            SHF FURNITURE
           </span>
         </Link>
         <ul className=" items-center hidden space-x-5 lg:flex">{navLinks}</ul>
