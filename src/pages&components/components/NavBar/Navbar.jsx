@@ -41,12 +41,12 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
       </li>
       <li>
         <Link
-          to="/"
+          to="/blogs"
           aria-label="About us"
           title="About us"
           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
         >
-          About us
+          Blogs
         </Link>
       </li>
     </>

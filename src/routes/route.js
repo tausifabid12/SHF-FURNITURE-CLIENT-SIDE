@@ -3,6 +3,7 @@ import DashBoardLayOut from "../layouts/DashBoardLayOut";
 import MainLayout from "../layouts/MainLayout";
 import AddProducts from "../pages&components/pages/AddProducts/AddProducts";
 import AllProducts from "../pages&components/pages/AllProducts/AllProducts";
+import Blogs from "../pages&components/pages/Blogs/Blogs";
 import Bookings from "../pages&components/pages/Bookings/Bookings";
 import Buyers from "../pages&components/pages/Buyers/Buyers";
 import ErrorPage from "../pages&components/pages/ErrorPage/ErrorPage";
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
       },
       {
         path: "/products",
