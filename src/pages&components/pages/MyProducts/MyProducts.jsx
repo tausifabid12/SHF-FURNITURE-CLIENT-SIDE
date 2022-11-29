@@ -9,12 +9,13 @@ const MyProducts = () => {
   const { data: bookings, refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/userProducts?email=${user?.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(`http://localhost:5000/userProducts?email=${user?.email}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }).then((res) => res.json()),
   });
 
-  console.log(user?.email);
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/delete/products/${id}`, {
       method: "DELETE",
@@ -27,6 +28,12 @@ const MyProducts = () => {
         }
         console.log(data);
       });
+  };
+
+  const handleAdvertise = (id) => {
+    fetch(`http://localhost:5000/delete/products/${id}`, {
+      method: "PUT",
+    });
   };
 
   return (
@@ -89,7 +96,10 @@ const MyProducts = () => {
                         </span>
                       </td>
                       <td className="p-3 ">
-                        <span className="btn  btn-xs bg-green-600 border-none text-white  ">
+                        <span
+                          onClick={() => handleAdvertise(order._id)}
+                          className="btn  btn-xs bg-green-600 border-none text-white  "
+                        >
                           <span>Advertise</span>
                         </span>
                       </td>

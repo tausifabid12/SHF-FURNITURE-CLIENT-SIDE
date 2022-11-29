@@ -4,6 +4,7 @@ import Advertise from "../AdvertiseProducts/Advertise";
 
 import Carousel from "../Carousel/Carousel";
 import ProductsTab from "../ProductsTab/ProductsTab";
+import Subscribe from "../Subscribe/Subscribe";
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Category></Category>
       <ProductsTab />
       <Advertise></Advertise>
+      <Subscribe></Subscribe>
     </div>
   );
 };
