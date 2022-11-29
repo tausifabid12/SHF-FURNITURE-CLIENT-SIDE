@@ -2,12 +2,8 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="grid place-content-center h-full w-full">
-      <div className="flex items-center justify-center space-x-2">
-        <div className="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
-        <div className="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
-        <div className="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
-      </div>
+    <div className="min-w-full min-h-[screen] mx-auto justify-center items-center ">
+      <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-green-500"></div>
     </div>
   );
 };

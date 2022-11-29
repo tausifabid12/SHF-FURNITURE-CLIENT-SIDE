@@ -4,7 +4,7 @@ import ProductsCard from "../../components/ProductsCard/ProductsCard";
 
 const AllProducts = () => {
   const products = useLoaderData();
-  console.log(products.data);
+
   return (
     <div className="grid grid-cols-1 gap-5 py-20 md:grid-cols-2 lg:grid-cols-4">
       {products?.data.map((product) => (

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import DetailCard from "../../components/DetailCard/DetailCard";
+
+import ProductsCard from "../../components/ProductsCard/ProductsCard";
 
 const SelectedProducts = () => {
   const selectedProducts = useLoaderData();
@@ -47,9 +48,10 @@ const SelectedProducts = () => {
           </ol>
         </div>
       </div>
-      <div className="space-y-4">
+      <div className="w-full py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto">
         {data.map((data) => (
-          <DetailCard key={data._id} data={data} />
+          <ProductsCard key={data._id} product={data}></ProductsCard>
+          // <DetailCard key={data._id} data={data} />
         ))}
       </div>
     </div>

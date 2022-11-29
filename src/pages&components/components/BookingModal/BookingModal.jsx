@@ -20,18 +20,19 @@ const BookingModal = ({ data }) => {
       });
       return;
     }
-    const { productName, price, location, email, userName, mobile } = data;
+    const { productName, price, location, mobile } = data;
     const date = new Date().toLocaleDateString();
     const bookingInfo = {
       productName,
       price,
       location,
-      email,
-      userName,
+      email: userInfo?.email,
+      userName: userInfo?.userName,
       mobile,
       date,
       imgUrl,
     };
+    console.log(bookingInfo);
     fetch(`http://localhost:5000/booking`, {
       method: "POST",
       headers: {

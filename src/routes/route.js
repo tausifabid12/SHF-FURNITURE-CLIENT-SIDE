@@ -1,18 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
-import useUser from "../hooks/useUsers";
 import DashBoardLayOut from "../layouts/DashBoardLayOut";
 import MainLayout from "../layouts/MainLayout";
 import AddProducts from "../pages&components/pages/AddProducts/AddProducts";
 import AllProducts from "../pages&components/pages/AllProducts/AllProducts";
-
 import Bookings from "../pages&components/pages/Bookings/Bookings";
 import Buyers from "../pages&components/pages/Buyers/Buyers";
+import ErrorPage from "../pages&components/pages/ErrorPage/ErrorPage";
 import Home from "../pages&components/pages/Home/Home/Home";
 import Login from "../pages&components/pages/Login/Login";
 import ProductDetails from "../pages&components/pages/ProductDetails/ProductDetails";
 import SelectedProducts from "../pages&components/pages/SelectedProducts/SelectedProducts";
 import Sellers from "../pages&components/pages/Sellers/Sellers";
 import SignUP from "../pages&components/pages/SignUp/SignUP";
+import UserReports from "../pages&components/pages/UserReports/UserReports";
 import AdminRoute from "./AdminRoute/AdminRoute ";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SellerRoute from "./SellerRoute/SellerRoute";
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -64,7 +65,11 @@ const router = createBrowserRouter([
 
   {
     path: "/dashboard",
-    element: <DashBoardLayOut />,
+    element: (
+      <PrivateRoute>
+        <DashBoardLayOut />
+      </PrivateRoute>
+    ),
     children: [
       // {
       //   path: "/dashboard",
@@ -95,6 +100,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <Sellers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/reports",
+        element: (
+          <AdminRoute>
+            <UserReports />
           </AdminRoute>
         ),
       },

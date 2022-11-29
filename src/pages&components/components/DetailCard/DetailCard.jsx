@@ -1,10 +1,20 @@
 import React from "react";
 import BookingModal from "../BookingModal/BookingModal";
+import { FaHeartBroken } from "react-icons/fa";
+import ReportModal from "../ReportModal/ReportModal";
 
 const DetailCard = ({ data }) => {
-  const { price, productName, date, imgUrl, email, location } = data;
+  const { price, productName, date, imgUrl, email, location, _id } = data;
   return (
-    <div className="text-gray-900 px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    <div className=" relative text-gray-900 px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="absolute right-0">
+        <label
+          htmlFor="reportModal"
+          className="border-2 border-gray-900 rounded-md px-2 flex items-center font-bold"
+        >
+          <FaHeartBroken /> <span className="pl-2">Report</span>
+        </label>
+      </div>
       <div className="grid gap-10 lg:grid-cols-2">
         <div>
           <img
@@ -13,7 +23,7 @@ const DetailCard = ({ data }) => {
             alt=""
           />
         </div>
-        <div className="lg:pr-10">
+        <div className="lg:pr-10 pt-7">
           <h5 className="mb-4 text-4xl font-extrabold leading-none capitalize">
             {productName}
           </h5>
@@ -44,6 +54,7 @@ const DetailCard = ({ data }) => {
         </div>
       </div>
       <BookingModal data={data} />
+      <ReportModal id={_id} productName={productName} />
     </div>
   );
 };

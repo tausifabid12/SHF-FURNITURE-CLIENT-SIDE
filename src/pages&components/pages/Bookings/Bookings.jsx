@@ -27,6 +27,7 @@ const Bookings = () => {
         console.log(data);
       });
   };
+
   return (
     <div className="lg:px-10 ">
       <h2 className="text-3xl font-bold text-gray-900 pb-3">My Orders</h2>

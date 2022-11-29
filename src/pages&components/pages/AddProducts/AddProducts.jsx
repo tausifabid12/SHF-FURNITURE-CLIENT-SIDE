@@ -1,20 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
-import { AuthContext } from "../../../contexts/AuthProvider";
+import { toast } from "react-toastify";
 
 import useUser from "../../../hooks/useUsers";
 import Loading from "../../Loading/Loading";
 
 const AddProducts = () => {
+  const [productLoading, setProductLoading] = useState(false);
   const [userInfo] = useUser();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const { data: category, isLoading } = useQuery({
     queryKey: ["categories"],
@@ -22,8 +18,13 @@ const AddProducts = () => {
       fetch(`http://localhost:5000/category`).then((res) => res.json()),
   });
 
+  if (productLoading || isLoading) {
+    return <Loading />;
+  }
+
   const handleAddProduct = (data) => {
-    const { productName, price, location, email, category, userName } = data;
+    setProductLoading(true);
+    const { productName, price, location, email, category } = data;
     const date = new Date().toLocaleDateString();
     const image = data.image[0];
     const formData = new FormData();
@@ -56,15 +57,15 @@ const AddProducts = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            alert("success");
-            console.log(data);
+            if (data.result) {
+              setProductLoading(false);
+              toast.success("product added", {
+                position: "top-center",
+              });
+            }
           });
       });
   };
-
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
 
   return (
     <div className="px-24">
@@ -225,7 +226,10 @@ const AddProducts = () => {
           ></textarea>
         </div>
 
-        <button className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white">
+        <button
+          type="submit"
+          className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white"
+        >
           Add Product For Sale
         </button>
       </form>
