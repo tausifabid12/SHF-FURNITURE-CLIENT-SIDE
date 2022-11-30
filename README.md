@@ -4,6 +4,10 @@ This is a online used furniture selling and buying web site. where buyers can bu
 
 Explore the web site [SHF FURNITURE](https://sh-furniture-83c92.web.app/)
 
+### `Admin Email: tmabid12@gamil.com`
+
+### `Password: 129400`
+
 ## Features
 
 - Well Designed and Functional
@@ -22,6 +26,7 @@ Explore the web site [SHF FURNITURE](https://sh-furniture-83c92.web.app/)
 - Mamba UI
 - React
 - MongoDb
+- Express
 - Firebase
 - TanStack Query
 - React Hook Form
