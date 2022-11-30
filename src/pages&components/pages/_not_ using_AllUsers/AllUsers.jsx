@@ -5,7 +5,7 @@ const AllUsers = () => {
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users`, {
+      fetch(`https://furniture-server-nine.vercel.app/users`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },

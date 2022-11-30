@@ -33,7 +33,7 @@ const BookingModal = ({ data }) => {
       imgUrl,
     };
     console.log(bookingInfo);
-    fetch(`http://localhost:5000/booking`, {
+    fetch(`https://furniture-server-nine.vercel.app/booking`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

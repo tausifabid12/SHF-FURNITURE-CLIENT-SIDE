@@ -3,6 +3,7 @@ import React from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import Loading from "../../Loading/Loading";
 
 const Sellers = () => {
   const { removeUser } = useContext(AuthContext);
@@ -11,15 +12,18 @@ const Sellers = () => {
   const { data: sellers, refetch } = useQuery({
     queryKey: ["sellers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users?role=seller`, {
+      fetch(`https://furniture-server-nine.vercel.app/users?role=seller`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
       }).then((res) => res.json()),
   });
 
+  if (!sellers?.data) {
+    return <Loading />;
+  }
   const handleDeleteUser = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://furniture-server-nine.vercel.app/users/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -40,7 +44,7 @@ const Sellers = () => {
   };
 
   const handleVerify = (id) => {
-    fetch(`http://localhost:5000/user/verified?id=${id}`, {
+    fetch(`https://furniture-server-nine.vercel.app/user/verified?id=${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

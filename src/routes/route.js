@@ -36,13 +36,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        loader: () => fetch(`http://localhost:5000/products`),
+        loader: () =>
+          fetch(`https://furniture-server-nine.vercel.app/products`),
         element: <AllProducts />,
       },
       {
         path: "/products/:catName",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.catName}`),
+          fetch(
+            `https://furniture-server-nine.vercel.app/products/${params.catName}`
+          ),
         element: (
           <PrivateRoute>
             <SelectedProducts />
@@ -52,7 +55,9 @@ const router = createBrowserRouter([
       {
         path: "/products/item/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/item/${params.id}`),
+          fetch(
+            `https://furniture-server-nine.vercel.app/products/item/${params.id}`
+          ),
         element: (
           <PrivateRoute>
             <ProductDetails />

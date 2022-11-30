@@ -6,7 +6,7 @@ const ProductsCard = ({ product }) => {
   return (
     <Link to={`/products/item/${_id}`}>
       <div>
-        <div className="relative rounded-md shadow-md h-96 bg-[#f1f1f1] dark:dark:bg-gray-900 dark:dark:text-gray-100">
+        <div className="relative rounded-md shadow-md h-96 bg-[#f1f1f1] ease-in-out duration-300 hover:scale-105 dark:dark:bg-gray-900 dark:dark:text-gray-100 ">
           <img
             src={imgUrl}
             alt=""

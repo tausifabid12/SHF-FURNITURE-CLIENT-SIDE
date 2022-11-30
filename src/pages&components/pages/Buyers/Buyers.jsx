@@ -8,7 +8,7 @@ const Buyers = () => {
   const { data: buyers, refetch } = useQuery({
     queryKey: ["buyers"],
     queryFn: () =>
-      fetch(`http://localhost:5000/users?role=buyer`, {
+      fetch(`https://furniture-server-nine.vercel.app/users?role=buyer`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -16,7 +16,7 @@ const Buyers = () => {
   });
 
   const handleDeleteUser = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://furniture-server-nine.vercel.app/users/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

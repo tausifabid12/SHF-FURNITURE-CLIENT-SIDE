@@ -6,7 +6,7 @@ const UserReports = () => {
   const { data: reports, refetch } = useQuery({
     queryKey: ["reports"],
     queryFn: () =>
-      fetch(`http://localhost:5000/report`, {
+      fetch(`https://furniture-server-nine.vercel.app/report`, {
         headers: {
           authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -14,7 +14,7 @@ const UserReports = () => {
   });
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/delete/report/${id}`, {
+    fetch(`https://furniture-server-nine.vercel.app/delete/report/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

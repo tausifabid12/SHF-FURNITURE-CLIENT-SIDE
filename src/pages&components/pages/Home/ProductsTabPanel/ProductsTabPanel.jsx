@@ -1,8 +1,11 @@
 import React from "react";
 import ProductsCard from "../../../components/ProductsCard/ProductsCard";
+import Loading from "../../../Loading/Loading";
 
 const ProductsTabPanel = ({ products }) => {
-  console.log(products?.data, "this is ");
+  if (!products?.data) {
+    return <Loading />;
+  }
   return (
     <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-16">
       {products?.data.map((product) => (

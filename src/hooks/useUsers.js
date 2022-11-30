@@ -10,7 +10,9 @@ const useUser = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:5000/usersInfo?email=${user?.email}`)
+      fetch(
+        `https://furniture-server-nine.vercel.app/usersInfo?email=${user?.email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setCurrentUser(data.data);

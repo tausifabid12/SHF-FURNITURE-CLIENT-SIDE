@@ -1,8 +1,8 @@
 # SHF FURNITURE
 
-## This is a online used furniture selling and buying web site.
+This is a online used furniture selling and buying web site. where buyers can buy products and seller can add their products for sale.
 
-Explore the web site [SHF FURNITURE](https://github.com/facebook/create-react-app)
+Explore the web site [SHF FURNITURE](https://sh-furniture-83c92.web.app/)
 
 ## Features
 

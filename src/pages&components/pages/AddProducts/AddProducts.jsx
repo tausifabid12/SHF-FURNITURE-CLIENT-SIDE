@@ -15,14 +15,16 @@ const AddProducts = () => {
   const { data: category, isLoading } = useQuery({
     queryKey: ["categories"],
     queryFn: () =>
-      fetch(`http://localhost:5000/category`).then((res) => res.json()),
+      fetch(`https://furniture-server-nine.vercel.app/category`).then((res) =>
+        res.json()
+      ),
   });
 
   if (productLoading || isLoading) {
     return <Loading />;
   }
 
-  const handleAddProduct = (data) => {
+  const handleAddProduct = (data, e) => {
     setProductLoading(true);
     const { productName, price, location, email, category } = data;
     const date = new Date().toLocaleDateString();
@@ -48,7 +50,7 @@ const AddProducts = () => {
           category,
         };
 
-        fetch("http://localhost:5000/products", {
+        fetch("https://furniture-server-nine.vercel.app/products", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -62,6 +64,8 @@ const AddProducts = () => {
               toast.success("product added", {
                 position: "top-center",
               });
+
+              e.target.reset();
             }
           });
       });
@@ -226,12 +230,11 @@ const AddProducts = () => {
           ></textarea>
         </div>
 
-        <button
+        <input
           type="submit"
+          value="Add Product For Sale"
           className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white"
-        >
-          Add Product For Sale
-        </button>
+        />
       </form>
     </div>
   );

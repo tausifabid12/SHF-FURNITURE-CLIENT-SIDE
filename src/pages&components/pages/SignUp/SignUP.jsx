@@ -87,7 +87,7 @@ const SignUP = () => {
 
   // posting user info to database
   const handleUser = (info) => {
-    return fetch("http://localhost:5000/users", {
+    return fetch("https://furniture-server-nine.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

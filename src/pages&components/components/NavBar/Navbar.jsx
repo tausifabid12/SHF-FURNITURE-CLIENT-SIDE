@@ -93,7 +93,7 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
     </>
   );
   return (
-    <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full z-20 lg:max-w-screen-xl md:px-24 lg:px-8">
       <div className="relative flex items-center justify-between">
         <button
           aria-label="Open Menu"
@@ -166,7 +166,7 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
             </svg>
           </button>
           {isMenuOpen && (
-            <div className="absolute top-0 left-0 w-full">
+            <div className="absolute z-20 top-0 left-0 w-full">
               <div className="p-5 bg-white border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>

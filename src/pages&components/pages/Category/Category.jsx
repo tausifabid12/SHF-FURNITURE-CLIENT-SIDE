@@ -6,11 +6,13 @@ const Category = () => {
   const { data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: () =>
-      fetch("http://localhost:5000/category").then((res) => res.json()),
+      fetch("https://furniture-server-nine.vercel.app/category").then((res) =>
+        res.json()
+      ),
   });
 
   //   const handleCategory = (catName) => {
-  //     fetch(`http://localhost:5000/products/${catName}`)
+  //     fetch(`https://furniture-server-nine.vercel.app/products/${catName}`)
   //       .then((res) => res.json())
   //       .then((data) => console.log(data));
   //   };

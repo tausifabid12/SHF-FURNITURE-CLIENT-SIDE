@@ -10,15 +10,18 @@ const MyProducts = () => {
   const { data: bookings, refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/userProducts?email=${user?.email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }).then((res) => res.json()),
+      fetch(
+        `https://furniture-server-nine.vercel.app/userProducts?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      ).then((res) => res.json()),
   });
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/delete/products/${id}`, {
+    fetch(`https://furniture-server-nine.vercel.app/delete/products/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -32,7 +35,7 @@ const MyProducts = () => {
   };
 
   const handleAdvertise = (id) => {
-    fetch(`http://localhost:5000/products?id=${id}`, {
+    fetch(`https://furniture-server-nine.vercel.app/products?id=${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

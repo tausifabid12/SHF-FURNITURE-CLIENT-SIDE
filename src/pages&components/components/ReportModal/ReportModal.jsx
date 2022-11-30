@@ -17,7 +17,7 @@ const ReportModal = ({ id, productName }) => {
     };
     console.log(reportInfo);
 
-    fetch(`http://localhost:5000/report`, {
+    fetch(`https://furniture-server-nine.vercel.app/report`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

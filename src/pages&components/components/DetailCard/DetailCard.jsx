@@ -10,11 +10,14 @@ const DetailCard = ({ data }) => {
   const { data: seller } = useQuery({
     queryKey: ["seller", email],
     queryFn: () =>
-      fetch(`http://localhost:5000/usersInfo?email=${email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }).then((res) => res.json()),
+      fetch(
+        `https://furniture-server-nine.vercel.app/usersInfo?email=${email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      ).then((res) => res.json()),
   });
 
   return (

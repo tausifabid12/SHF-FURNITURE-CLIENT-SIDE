@@ -10,7 +10,7 @@ const ProductsTab = () => {
   //   const { data: categories } = useQuery({
   //     queryKey: ["categories"],
   //     queryFn: () =>
-  //       fetch("http://localhost:5000/category").then((res) => res.json()),
+  //       fetch("https://furniture-server-nine.vercel.app/category").then((res) => res.json()),
   //   });
 
   useEffect(() => {
@@ -22,9 +22,9 @@ const ProductsTab = () => {
   const { data: products } = useQuery({
     queryKey: ["products", selectedCat],
     queryFn: () =>
-      fetch(`http://localhost:5000/products/${selectedCat}`).then((res) =>
-        res.json()
-      ),
+      fetch(
+        `https://furniture-server-nine.vercel.app/products/${selectedCat}`
+      ).then((res) => res.json()),
   });
 
   return (

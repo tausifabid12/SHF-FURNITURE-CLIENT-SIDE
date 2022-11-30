@@ -9,15 +9,18 @@ const Bookings = () => {
   const { data: bookings, refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/booking/user?email=${user?.email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }).then((res) => res.json()),
+      fetch(
+        `https://furniture-server-nine.vercel.app/booking/user?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      ).then((res) => res.json()),
   });
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/delete/booking/${id}`, {
+    fetch(`https://furniture-server-nine.vercel.app/delete/booking/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
