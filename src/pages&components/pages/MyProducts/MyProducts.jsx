@@ -30,7 +30,6 @@ const MyProducts = () => {
           refetch();
           toast.error("Order Deleted");
         }
-        console.log(data);
       });
   };
 

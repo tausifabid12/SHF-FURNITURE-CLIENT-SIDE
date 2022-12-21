@@ -6,7 +6,7 @@ const Drawer = ({ isDrawerOpen }) => {
   const [userInfo] = useUser();
   return (
     <div
-      className={`bg-[#f1f1f1] z-50 ${
+      className={`bg-accent z-50 ${
         isDrawerOpen || "hidden"
       } lg:block h-full p-3 space-y-2 w-60 dark:dark:bg-gray-900 dark:dark:text-gray-100`}
     >

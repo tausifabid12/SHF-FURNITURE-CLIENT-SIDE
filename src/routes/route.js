@@ -11,6 +11,7 @@ import ErrorPage from "../pages&components/pages/ErrorPage/ErrorPage";
 import Home from "../pages&components/pages/Home/Home/Home";
 import Login from "../pages&components/pages/Login/Login";
 import MyProducts from "../pages&components/pages/MyProducts/MyProducts";
+import Payment from "../pages&components/pages/Payment/Payment";
 import ProductDetails from "../pages&components/pages/ProductDetails/ProductDetails";
 import SelectedProducts from "../pages&components/pages/SelectedProducts/SelectedProducts";
 import Sellers from "../pages&components/pages/Sellers/Sellers";
@@ -46,11 +47,7 @@ const router = createBrowserRouter([
           fetch(
             `https://furniture-server-nine.vercel.app/products/${params.catName}`
           ),
-        element: (
-          <PrivateRoute>
-            <SelectedProducts />
-          </PrivateRoute>
-        ),
+        element: <SelectedProducts />,
       },
       {
         path: "/products/item/:id",
@@ -90,6 +87,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/bookings",
         element: <Bookings />,
+      },
+      {
+        path: "/dashboard/bookings/payment/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://furniture-server-nine.vercel.app/products/item/${params.id}`
+          ),
+        element: <Payment />,
       },
       {
         path: "/dashboard/addProduct",

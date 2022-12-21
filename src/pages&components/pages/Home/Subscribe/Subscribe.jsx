@@ -2,7 +2,7 @@ import React from "react";
 
 const Subscribe = () => {
   return (
-    <section className="py-12 my-12 rounded-md bg-[#f1f1f1] dark:dark:bg-gray-800 dark:dark:text-gray-50">
+    <section className="py-12 my-12 rounded-md bg-accent  dark:dark:bg-gray-800 dark:dark:text-gray-50">
       <div className="container mx-auto flex flex-col justify-center p-4 space-y-8 md:p-10 lg:space-y-0 lg:space-x-12 lg:justify-between lg:flex-row">
         <div className="flex flex-col space-y-4 text-center lg:text-left">
           <h1 className="text-5xl font-bold leading-none">Stay in the loop</h1>

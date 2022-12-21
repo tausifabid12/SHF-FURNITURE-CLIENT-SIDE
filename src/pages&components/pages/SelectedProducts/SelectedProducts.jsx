@@ -8,7 +8,7 @@ const SelectedProducts = () => {
   const data = selectedProducts?.data;
   return (
     <div>
-      <div className="flex items-center w-full justify-between py-16 px-12 text-gray-900 bg-[#f1f1f1] ">
+      <div className="flex items-center w-full justify-between py-16 px-12 text-gray-900 bg-accent ">
         <h2 className="text-3xl font-bold uppercase">{data[0].category}</h2>
         <div
           aria-label="breadcrumb"
@@ -48,7 +48,7 @@ const SelectedProducts = () => {
           </ol>
         </div>
       </div>
-      <div className="w-full py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto">
+      <div className="w-full py-16 px-5 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto">
         {data.map((data) => (
           <ProductsCard key={data._id} product={data}></ProductsCard>
           // <DetailCard key={data._id} data={data} />

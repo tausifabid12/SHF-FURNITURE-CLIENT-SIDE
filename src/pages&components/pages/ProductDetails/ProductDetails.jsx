@@ -9,7 +9,7 @@ const ProductDetails = () => {
   console.log(info);
   return (
     <div>
-      <div className="flex items-center w-full justify-between py-16 px-12 text-gray-900 bg-[#f1f1f1] ">
+      <div className="flex items-center w-full justify-between py-16 px-12 text-gray-900 bg-accent ">
         {/* <h2 className="text-3xl font-bold uppercase">{data[0]?.category}</h2> */}
         <div
           aria-label="breadcrumb"

@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 const SignUP = () => {
   // const [userEmail, setUserEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { createUser, socialLogin } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
@@ -28,6 +29,7 @@ const SignUP = () => {
   } = useForm();
 
   const handleSignUp = (data, e) => {
+    setLoading(true);
     const userEmail = data?.email;
     const userInfo = {
       email: data?.email,
@@ -36,13 +38,15 @@ const SignUP = () => {
     };
     createUser(data.email, data.password)
       .then((result) => {
-        console.log(result);
         setError("");
         handleUser(userInfo)
           .then((res) => res.json())
           .then((data) => {
             if (data.result) {
-              toast.success("signUP success");
+              toast.success("signUP success", {
+                autoClose: 1500,
+              });
+              setLoading(false);
               // upDateUserInfo({
               //   displayName: data?.userName,
               //   photoURL: "https://example.com/jane-q-user/profile.jpg",
@@ -56,11 +60,13 @@ const SignUP = () => {
       })
       .catch((error) => {
         setError(error.message);
+        setLoading(false);
         e.target.reset();
       });
   };
 
   const handleGoogleSignIn = () => {
+    setLoading(true);
     socialLogin(googleProvider)
       .then((result) => {
         const email = result.user?.email;
@@ -73,7 +79,10 @@ const SignUP = () => {
           .then((res) => res.json())
           .then((data) => {
             if (data.result) {
-              toast.success("signUP success");
+              toast.success("signUP success", {
+                autoClose: 1500,
+              });
+              setLoading(false);
               setCreatedUserEmail(email);
             }
           });
@@ -82,6 +91,7 @@ const SignUP = () => {
       })
       .catch((error) => {
         setError(error.message);
+        setLoading(false);
       });
   };
 
@@ -96,7 +106,7 @@ const SignUP = () => {
     });
   };
   return (
-    <div className="lg:py-16 grid place-content-center bg-[#f1f1f1]">
+    <div className="px-4 py-4 md:py-16 grid md:place-content-center bg-accent">
       <div className="w-full lg:w-[470px]  bg-white p-8 space-y-3 shadow-md rounded-xl  dark:dark:bg-gray-900 dark:dark:text-gray-100">
         <h1 className="text-3xl font-bold text-center">Sign up</h1>
         <p className="py-5 text-red-500 font-bold">{error}</p>
@@ -116,7 +126,7 @@ const SignUP = () => {
               name="userName"
               id="userName"
               placeholder="userName"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
           <div className="space-y-1 text-sm">
@@ -131,7 +141,7 @@ const SignUP = () => {
               name="email"
               id="email"
               placeholder="email"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
           <div className="space-y-1 text-sm">
@@ -144,7 +154,7 @@ const SignUP = () => {
               })}
               name="role"
               id="role"
-              className="w-full  p-3  rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full  p-3  rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             >
               <option defaultValue>buyer</option>
               <option>seller</option>
@@ -166,7 +176,7 @@ const SignUP = () => {
               name="password"
               id="password"
               placeholder="Password"
-              className="w-full px-4 py-3 bg-[#f1f1f1] rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 bg-accent rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
             {errors.password && errors.password.type === "required" && (
               <span className="text-red-500 pt-2">This is required</span>
@@ -182,9 +192,13 @@ const SignUP = () => {
               </Link>
             </div>
           </div>
-          <button className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white">
-            Sign Up
-          </button>
+          {loading ? (
+            <button className="btn btn-square w-full loading"></button>
+          ) : (
+            <button className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white">
+              Sign up
+            </button>
+          )}
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:dark:bg-gray-700"></div>

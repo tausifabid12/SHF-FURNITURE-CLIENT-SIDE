@@ -10,6 +10,7 @@ import useToken from "../../../hooks/useToken";
 const Login = () => {
   //   const [userEmail, setUserEmail] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const googleProvider = new GoogleAuthProvider();
   const { login, socialLogin } = useContext(AuthContext);
   const [loginUserEmail, setLoginUserEmail] = useState("");
@@ -31,36 +32,45 @@ const Login = () => {
   console.log(token, loginUserEmail);
 
   const handleLogin = (data, e) => {
-    console.log(data);
+    setLoading(true);
     login(data.email, data.password)
       .then((result) => {
         setError("");
+        setLoading(false);
         setLoginUserEmail(data.email);
-        toast.success("login success");
+        toast.success("login success", {
+          autoClose: 1500,
+        });
         e.target.reset();
       })
       .catch((error) => {
         setError(error.message);
         e.target.reset();
+        setLoading(false);
       });
   };
 
   const handleGoogleSignIn = () => {
-    console.log();
+    setLoading(true);
     socialLogin(googleProvider)
       .then((result) => {
         console.log(result.user.email);
         setLoginUserEmail(result.user.email);
+        setLoading(false);
         setError("");
-        toast.success("login success");
+        toast.success("login success", {
+          autoClose: 1500,
+        });
+
         // setUserEmail(data.email);
       })
       .catch((error) => {
         setError(error.message);
+        setLoading(false);
       });
   };
   return (
-    <div className="lg:py-16 grid place-content-center bg-[#f1f1f1]">
+    <div className="px-4 py-4 md:py-16 grid md:place-content-center bg-accent">
       <div className="w-full lg:w-[470px]  bg-white p-8 space-y-3 shadow-md rounded-xl  dark:dark:bg-gray-900 dark:dark:text-gray-100">
         <h1 className="text-3xl font-bold text-center">Login</h1>
         <p className="py-5 text-red-500 font-bold">{error}</p>
@@ -80,7 +90,7 @@ const Login = () => {
               name="email"
               id="email"
               placeholder="email"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
           {errors.email && (
@@ -99,7 +109,7 @@ const Login = () => {
               name="password"
               id="password"
               placeholder="Password"
-              className="w-full px-4 py-3 bg-[#f1f1f1] rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 bg-accent rounded-md dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
             {errors.password && errors.password.type === "required" && (
               <span className="text-red-500 pt-2">This is required</span>
@@ -115,9 +125,13 @@ const Login = () => {
               </Link>
             </div>
           </div>
-          <button className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white">
-            Sign in
-          </button>
+          {loading ? (
+            <button className="btn btn-square w-full loading"></button>
+          ) : (
+            <button className="block w-full p-3 text-center rounded-sm bg-gray-900  text-white">
+              Sign in
+            </button>
+          )}
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:dark:bg-gray-700"></div>

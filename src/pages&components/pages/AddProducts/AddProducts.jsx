@@ -93,7 +93,7 @@ const AddProducts = () => {
               readOnly
               id="userName"
               placeholder="userName"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
           <div className="space-y-1 text-sm w-1/2">
@@ -110,7 +110,7 @@ const AddProducts = () => {
               defaultValue={userInfo?.email}
               readOnly
               placeholder="email"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
         </div>
@@ -130,7 +130,7 @@ const AddProducts = () => {
               name="productName"
               id="productName"
               placeholder="Product Name"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
           <div className="space-y-1 text-sm w-1/2">
@@ -145,7 +145,7 @@ const AddProducts = () => {
               name="price"
               id="price"
               placeholder="price"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
         </div>
@@ -165,7 +165,7 @@ const AddProducts = () => {
               name="ProductAge"
               id="ProductAge"
               placeholder="ProductAge"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
           <div className="space-y-1 text-sm w-1/2">
@@ -180,7 +180,7 @@ const AddProducts = () => {
               name="location"
               id="location"
               placeholder="location"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
         </div>
@@ -196,7 +196,7 @@ const AddProducts = () => {
               })}
               name="image"
               id="image"
-              className="w-full px-4 py-3 rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full px-4 py-3 rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             />
           </div>
           <div className="space-y-1 w-1/2 text-sm">
@@ -209,7 +209,7 @@ const AddProducts = () => {
               })}
               name="category"
               id="category"
-              className="w-full  p-3  rounded-md bg-[#f1f1f1] dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
+              className="w-full  p-3  rounded-md bg-accent dark:dark:border-gray-700 dark:dark:bg-gray-900 dark:dark:text-gray-100 "
             >
               <option defaultValue>Select Your Option</option>
               {category?.data &&
@@ -226,7 +226,7 @@ const AddProducts = () => {
           <textarea
             id="bio"
             placeholder=""
-            className="w-full h-24 bg-[#f1f1f1] rounded-md focus:ring focus:ring-opacity-75  dark:border-gray-700 dark:text-gray-900"
+            className="w-full h-24 bg-accent rounded-md focus:ring focus:ring-opacity-75  dark:border-gray-700 dark:text-gray-900"
           ></textarea>
         </div>
 

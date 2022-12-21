@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import BookingModal from "../BookingModal/BookingModal";
 import { FaHeartBroken } from "react-icons/fa";
 import ReportModal from "../ReportModal/ReportModal";
 import { FaCheckCircle } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 const DetailCard = ({ data }) => {
+  const [loading, setLoading] = useState(false);
+
   const { price, productName, date, imgUrl, email, location, _id } = data;
 
   const { data: seller } = useQuery({
@@ -22,7 +24,7 @@ const DetailCard = ({ data }) => {
 
   return (
     <div className=" relative text-gray-900 px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <div className="absolute right-0">
+      <div className="absolute right-5">
         <label
           htmlFor="reportModal"
           className="border-2 border-gray-900 rounded-md px-2 flex items-center font-bold"
@@ -55,14 +57,19 @@ const DetailCard = ({ data }) => {
           <p className="mb-5 text-gray-900">{}</p>
           <hr className="mb-5 border-gray-300" />
           <div className="flex items-center justify-between py-3">
-            <label
-              htmlFor="bookingModal"
-              className="bg-gray-900 text-white text-lg font-semibold py-2 px-4 rounded-sm"
-            >
-              Book Now
-            </label>
-            <div>
-              <p className="text-lg flex items-center  font-bold">
+            {loading ? (
+              <button className="btn btn-square loading"></button>
+            ) : (
+              <label
+                htmlFor="bookingModal"
+                className="btn btn-am bg-gray-900 text-white   rounded-sm"
+              >
+                Book Now
+              </label>
+            )}
+
+            <div className="px-3">
+              <p className="text-sm flex items-center  font-bold">
                 Post By : {email}
                 {seller?.data?.verified && (
                   <span className="text-green-600 pl-1">
@@ -75,8 +82,8 @@ const DetailCard = ({ data }) => {
           </div>
         </div>
       </div>
-      <BookingModal data={data} />
-      <ReportModal id={_id} productName={productName} />
+      <BookingModal data={data} setLoading={setLoading} />
+      <ReportModal id={_id} productName={productName} setLoading={setLoading} />
     </div>
   );
 };

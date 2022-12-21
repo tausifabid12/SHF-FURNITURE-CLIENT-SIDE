@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import ProductsCard from "../../../components/ProductsCard/ProductsCard";
-import Loading from "../../../Loading/Loading";
+// import Loading from "../../../Loading/Loading";
 
 const Advertise = () => {
   const { data: products } = useQuery({
@@ -14,9 +14,9 @@ const Advertise = () => {
       }).then((res) => res.json()),
   });
 
-  if (!products?.data) {
-    return <Loading />;
-  }
+  // if (!products?.data) {
+  //   return <Loading />;
+  // }
   return (
     <div className={products?.data ? "block" : "hidden"}>
       <div className="px-4">

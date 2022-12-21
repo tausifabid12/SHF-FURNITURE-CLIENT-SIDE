@@ -1,6 +1,6 @@
 import React from "react";
 import Category from "../../Category/Category";
-import Advertise from "../AdvertiseProducts/Advertise";
+// import Advertise from "../AdvertiseProducts/Advertise";
 
 import Carousel from "../Carousel/Carousel";
 import ProductsTab from "../ProductsTab/ProductsTab";
@@ -12,7 +12,7 @@ const Home = () => {
       <Carousel />
       <Category></Category>
       <ProductsTab />
-      <Advertise></Advertise>
+      {/* <Advertise></Advertise> */}
       <Subscribe></Subscribe>
     </div>
   );

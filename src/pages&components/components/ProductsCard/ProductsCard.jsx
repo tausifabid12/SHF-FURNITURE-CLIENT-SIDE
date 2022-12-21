@@ -6,7 +6,7 @@ const ProductsCard = ({ product }) => {
   return (
     <Link to={`/products/item/${_id}`}>
       <div>
-        <div className="relative rounded-md shadow-md h-96 bg-[#f1f1f1] ease-in-out duration-300 hover:scale-105 dark:dark:bg-gray-900 dark:dark:text-gray-100 ">
+        <div className="relative rounded-md shadow-md h-96 bg-accent ease-in-out duration-300 hover:scale-105 dark:dark:bg-gray-900 dark:dark:text-gray-100 ">
           <img
             src={imgUrl}
             alt=""
@@ -19,11 +19,8 @@ const ProductsCard = ({ product }) => {
               </h2>
               <p className="dark:dark:text-gray-100">Price: ${price}</p>
             </div>
-            <div className="absolute bottom-2 left-[23%]">
-              <button
-                type="button"
-                className="p-3 font-semibold tracking-wide rounded-md dark:dark:bg-violet-400 dark:dark:text-gray-900"
-              >
+            <div className="w-full absolute bottom-2 left-0">
+              <button type="button" className="btn btn-ghost w-full ">
                 view Details
               </button>
             </div>

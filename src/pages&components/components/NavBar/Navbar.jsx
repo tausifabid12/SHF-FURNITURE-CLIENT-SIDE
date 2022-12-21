@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
 
   const navLinks = (
@@ -12,8 +11,8 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
       <li>
         <Link
           to="/"
-          aria-label="Our product"
-          title="Our product"
+          aria-label="Home"
+          title="Home"
           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
         >
           Home
@@ -29,21 +28,26 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
           Products
         </Link>
       </li>
-      <li>
-        <Link
-          to="/dashboard"
-          aria-label="Product pricing"
-          title="Product pricing"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-          Dashboard
-        </Link>
-      </li>
+      {user?.email ? (
+        <li>
+          <Link
+            to="/dashboard"
+            aria-label="Product pricing"
+            title="dashBoard"
+            className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+          >
+            Dashboard
+          </Link>
+        </li>
+      ) : (
+        ""
+      )}
+
       <li>
         <Link
           to="/blogs"
           aria-label="About us"
-          title="About us"
+          title="Blogs"
           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
         >
           Blogs
@@ -55,175 +59,99 @@ const Navbar = ({ isDrawerOpen, setIsDrawerOpen }) => {
   const navButtons = (
     <>
       {user?.email ? (
-        <li>
+        <Link
+          onClick={() => logOut()}
+          to="/login"
+          className="btn  btn-ghost btn-sm text-md  mx-3 lg:h-10 lg:px-6 text-dark transition duration-200 rounded shadow-md  "
+          aria-label="Sign up"
+          title="Log Out"
+        >
+          LogOut
+        </Link>
+      ) : (
+        <>
           <Link
-            onClick={() => logOut()}
             to="/login"
-            className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+            className="btn  btn-ghost btn-sm text-sm  mx-3 lg:h-10 lg:px-6 text-dark transition duration-200 rounded shadow-md "
+            aria-label="Sign up"
+            title="Sign in"
+          >
+            log in
+          </Link>
+
+          <Link
+            to="/signUp"
+            className="btn  btn-ghost btn-sm text-sm px-3 lg:h-10 lg:px-6 text-dark transition duration-200 rounded shadow-md"
             aria-label="Sign up"
             title="Sign up"
           >
-            LogOut
+            Sign up
           </Link>
-        </li>
-      ) : (
-        <>
-          <li>
-            <Link
-              to="/login"
-              className="inline-flex items-center justify-center   h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Sign up"
-              title="Sign up"
-            >
-              log in
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/signUp"
-              className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-dark transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Sign up"
-              title="Sign up"
-            >
-              Sign up
-            </Link>
-          </li>
         </>
       )}
     </>
   );
   return (
-    <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full z-20 lg:max-w-screen-xl md:px-24 lg:px-8">
-      <div className="relative flex items-center justify-between">
-        <button
-          aria-label="Open Menu"
-          title="Open Menu"
-          className="block lg:hidden p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
-          onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-        >
-          <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
-            <path
-              fill="currentColor"
-              d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
-            />
-            <path
-              fill="currentColor"
-              d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
-            />
-            <path
-              fill="currentColor"
-              d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
-            />
-          </svg>
-        </button>
-        <Link
-          to="/"
-          aria-label="Company"
-          title="Company"
-          className="inline-flex items-center"
-        >
-          <svg
-            className="w-8 text-deep-purple-accent-400"
-            viewBox="0 0 24 24"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeMiterlimit="10"
-            stroke="currentColor"
-            fill="none"
+    <>
+      <div className="navbar  ">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              {navLinks}
+            </ul>
+          </div>
+
+          <Link
+            to="/"
+            aria-label="Company"
+            title="Company"
+            className=" normal-case "
           >
-            <rect x="3" y="1" width="7" height="12" />
-            <rect x="3" y="17" width="7" height="6" />
-            <rect x="14" y="1" width="7" height="6" />
-            <rect x="14" y="11" width="7" height="12" />
-          </svg>
-          <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-            SHF FURNITURE
-          </span>
-        </Link>
-        <ul className=" items-center hidden space-x-5 lg:flex">{navLinks}</ul>
-        <ul className="items-center hidden space-x-5 lg:flex">{navButtons}</ul>
-        <div className="lg:hidden">
-          <button
-            aria-label="Open Menu"
-            title="Open Menu"
-            className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
-            onClick={() => setIsMenuOpen(true)}
-          >
-            <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
-              <path
-                fill="currentColor"
-                d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
-              />
-              <path
-                fill="currentColor"
-                d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
-              />
-              <path
-                fill="currentColor"
-                d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
-              />
-            </svg>
-          </button>
-          {isMenuOpen && (
-            <div className="absolute z-20 top-0 left-0 w-full">
-              <div className="p-5 bg-white border rounded shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <Link
-                      to="/"
-                      aria-label="Company"
-                      title="Company"
-                      className="inline-flex items-center"
-                    >
-                      <svg
-                        className="w-8 text-deep-purple-accent-400"
-                        viewBox="0 0 24 24"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeMiterlimit="10"
-                        stroke="currentColor"
-                        fill="none"
-                      >
-                        <rect x="3" y="1" width="7" height="12" />
-                        <rect x="3" y="17" width="7" height="6" />
-                        <rect x="14" y="1" width="7" height="6" />
-                        <rect x="14" y="11" width="7" height="12" />
-                      </svg>
-                      <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-                        Company
-                      </span>
-                    </Link>
-                  </div>
-                  <div>
-                    <button
-                      aria-label="Close Menu"
-                      title="Close Menu"
-                      className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
-                        <path
-                          fill="currentColor"
-                          d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-                <nav>
-                  <ul className="space-y-4">{navLinks}</ul>
-                  <ul className="items-center pt-3  space-x-5 flex lg:hidden">
-                    {navButtons}
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          )}
+            {/* <svg
+              className="w-4 text-deep-purple-accent-400"
+              viewBox="0 0 24 24"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              stroke="currentColor"
+              fill="none"
+            >
+              <rect x="3" y="1" width="7" height="12" />
+              <rect x="3" y="17" width="7" height="6" />
+              <rect x="14" y="1" width="7" height="6" />
+              <rect x="14" y="11" width="7" height="12" />
+            </svg> */}
+            <span className=" text-sm lg:text-xl font-bold text-gray-800 uppercase">
+              SHF FURNITURE
+            </span>
+          </Link>
         </div>
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+        </div>
+        <div className="navbar-end">{navButtons}</div>
       </div>
-    </div>
+    </>
   );
 };
 
